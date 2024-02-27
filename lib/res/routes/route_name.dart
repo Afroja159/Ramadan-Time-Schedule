@@ -4,4 +4,5 @@ class RouteName {
   static const String prayer_time = '/time';
   static const String dua = '/dua';
   static const String calender = '/calender';
+  static const String settings = '/settings';
 }

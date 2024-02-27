@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ramadantime/res/colors/app_color.dart';
-class Dua extends StatefulWidget {
-  const Dua({Key? key}) : super(key: key);
+class DuaScreen extends StatefulWidget {
+  const DuaScreen({Key? key}) : super(key: key);
 
   @override
-  State<Dua> createState() => _DuaState();
+  State<DuaScreen> createState() => _DuaScreenState();
 }
 
-class _DuaState extends State<Dua> {
+class _DuaScreenState extends State<DuaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

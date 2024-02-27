@@ -5,12 +5,12 @@ import 'package:ramadantime/res/colors/app_color.dart';
 import 'package:ramadantime/view-models/controller/calender_controller.dart';
 
 
-class Calender extends StatefulWidget {
+class CalenderScreen extends StatefulWidget {
   @override
-  State<Calender> createState() => _CalenderState();
+  State<CalenderScreen> createState() => _CalenderScreenState();
 }
 
-class _CalenderState extends State<Calender> {
+class _CalenderScreenState extends State<CalenderScreen> {
   final CalenderController controller = Get.put(CalenderController());
 
   @override

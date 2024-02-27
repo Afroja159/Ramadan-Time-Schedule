@@ -36,7 +36,9 @@ class customBottomBar extends StatelessWidget {
           }
 
         },child:Get.currentRoute==RouteName.prayer_time ? Icon(Icons.watch_later_outlined,color:AppColor.appColor,):Icon(Icons.watch_later_outlined,color:Colors.black)) ,label:'Time'),
-        BottomNavigationBarItem(icon:InkWell(onTap:(){},child: Icon(Icons.settings,color:Colors.black)) ,label:'Settings'),
+        BottomNavigationBarItem(icon:InkWell(onTap:(){
+          Get.toNamed(RouteName.settings);
+        },child: Get.currentRoute==RouteName.settings ? Icon(Icons.settings,color:AppColor.appColor,):Icon(Icons.settings,color:Colors.black)) ,label:'Settings'),
       ],
     );
   }
