@@ -16,6 +16,7 @@ class customBottomBar extends StatelessWidget {
     final PlaceController _controller=Get.put(PlaceController());
     print(Get.currentRoute);
     return BottomNavigationBar(
+      backgroundColor: Colors.green[200],
       items: [
         BottomNavigationBarItem(icon:InkWell(
             onTap: (){

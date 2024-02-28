@@ -6,13 +6,21 @@ import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> main() async {
+void main() async {
   // Initialize Bangla locale data for date formatting
   await initializeDateFormatting('bn', null);
-  // Load the theme mode
+
+  // Load the theme mode or default to light mode
   bool? isDarkMode = await _loadThemeMode();
-  runApp(MyApp(isDarkMode: isDarkMode ?? false));
+
+  // If isDarkMode is not set (null), default to light mode
+  if (isDarkMode == null) {
+    isDarkMode = false;
+  }
+
+  runApp(MyApp(isDarkMode: isDarkMode));
 }
+
 Future<bool?> _loadThemeMode() async {
   try {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -23,17 +31,43 @@ Future<bool?> _loadThemeMode() async {
   }
 }
 
-class MyApp extends StatelessWidget {
-  final bool isDarkMode;
-  const MyApp({Key? key, required this.isDarkMode}) : super(key: key);
+Future<void> _saveThemeMode(bool isDarkMode) async {
+  try {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', isDarkMode);
+  } catch (e) {
+    print('Error saving theme mode: $e');
+  }
+}
 
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  final bool isDarkMode;
+
+  const MyApp({Key? key, this.isDarkMode = false}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+  // Static method to access _MyAppState from any context
+  static _MyAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<_MyAppState>();
+}
+
+class _MyAppState extends State<MyApp> {
+  late bool _isDarkMode;
+
+  @override
+  void initState() {
+    super.initState();
+    _isDarkMode = widget.isDarkMode;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Ramadan Time Table',
       debugShowCheckedModeBanner: false,
-      theme: isDarkMode ? ThemeData.dark() : ThemeData.light(),
+      theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
+
       getPages: AppRoutes.appRoutes(),
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
@@ -44,8 +78,14 @@ class MyApp extends StatelessWidget {
         const Locale('en', ''), // English
         const Locale('bn', ''), // Bangla
       ],
+
     );
   }
-}
 
+  void updateTheme(bool isDarkMode) {
+    setState(() {
+      _isDarkMode = isDarkMode;
+    });
+  }
+}
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ramadantime/main.dart';
 import 'package:ramadantime/res/colors/app_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
@@ -9,7 +11,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  late bool _isDarkMode;
+  late bool _isDarkMode = false;
 
   @override
   void initState() {
@@ -23,34 +25,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _isDarkMode = prefs.getBool('isDarkMode') ?? false;
     });
   }
+
   Future<void> _toggleTheme(bool value) async {
-    print('Toggle theme called with value: $value');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _isDarkMode = value;
     });
-    prefs.setBool('isDarkMode', value);
-    print('Theme mode set to: $value');
+    _saveThemeMode(value); // Save theme mode
+    MyApp.of(context)?.updateTheme(value); // Trigger rebuild of MyApp
+  }
+
+  Future<void> _saveThemeMode(bool isDarkMode) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', isDarkMode);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(backgroundColor: AppColor.appColor,
-      iconTheme: const IconThemeData(color: AppColor.fontColor),
-      title: const Text(
-        'সেটিংস',
-        style: TextStyle(color: AppColor.fontColor),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColor.appColor,
+        iconTheme: const IconThemeData(color: AppColor.fontColor),
+        title: const Text(
+          'সেটিংস',
+          style: TextStyle(color: AppColor.fontColor),
+        ),
+        centerTitle: true,
       ),
-      centerTitle: true,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'ডার্ক মোড',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.appColor ),
-
             ),
             Switch(
               value: _isDarkMode,
