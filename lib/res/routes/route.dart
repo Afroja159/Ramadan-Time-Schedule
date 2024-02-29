@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ramadantime/res/routes/route_name.dart';
+import 'package:ramadantime/view/Network%20checker%20screen/network_checker_screen.dart';
+import 'package:ramadantime/view/Splash%20screen/splash_screen.dart';
 import 'package:ramadantime/view/calender/calender_screen.dart';
 import 'package:ramadantime/view/home/Time_View.dart';
 import 'package:ramadantime/view/home/dua_screen.dart';
@@ -10,6 +12,18 @@ import 'package:ramadantime/view/settings/settings_screen.dart';
 
 class AppRoutes {
   static appRoutes() => [
+    GetPage(
+      name: RouteName.splashScreen,
+      page: () => SplashScreen(),
+      // transitionDuration: Duration(milliseconds: 250),
+      // transition: Transition.leftToRightWithFade,
+    ),
+    GetPage(
+      name: RouteName.networkCheckScreen,
+      page: () => NetworkCheckScreen(),
+      // transitionDuration: Duration(milliseconds: 250),
+      // transition: Transition.leftToRightWithFade,
+    ),
         GetPage(
           name: RouteName.homeScreen,
           page: () => HomePage(),

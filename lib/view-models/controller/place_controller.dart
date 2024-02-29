@@ -14,6 +14,7 @@ class PlaceController extends GetxController {
   var iftarTimeToday = ''.obs;
   var sehriTimeToday = ''.obs;
   var sehriTimeNextDay = ''.obs;
+  var iftarTimeNextDay = ''.obs;
   var savedPlace = ''.obs;
   var  currentDate=''.obs;
 
@@ -89,9 +90,8 @@ class PlaceController extends GetxController {
 
 // getting saved Place------
   Future<void> savedPlaceGetting() async {
-
     final SharedPreferences prefs = await _prefs;
-    savedPlace.value = prefs.getString('place')!;
+    savedPlace.value = prefs.getString('place') ?? ''; // Using null-aware operator
   }
 
 
@@ -142,6 +142,34 @@ class PlaceController extends GetxController {
     final DateTime nextDay = now.add(Duration(days: 1));
     String formattedDateNextDay = '${now.year}-${now.month}-${nextDay}';
     return formattedDateNextDay;
+  }
+
+  // fetch namaz time for the next day from api---------------
+  Future<dynamic> fetchNextDayTime() async {
+    loading.value = true;
+    final SharedPreferences prefs = await _prefs;
+    String? latitude = prefs.getString('latitude');
+    String? longitude = prefs.getString('longitude');
+
+    // Get the date for the next day
+    String nextDayDate = await nextDay();
+
+    final String method = '2'; // Method for Islamic Society of North America (ISNA)
+
+    dynamic responseNextDay = await _apiService.getApi(
+        'http://api.aladhan.com/v1/timings/$nextDayDate?latitude=$latitude&longitude=$longitude&method=$method');
+
+    if (responseNextDay['code'] == 200) {
+      final Map<String, dynamic> data = responseNextDay;
+      final Map<String, dynamic> timeData = data['data']['timings'];
+
+      // Update the iftarTimeNextDay and sehriTimeNextDay variables with the fetched data
+      iftarTimeNextDay.value = timeData['Maghrib'];
+      sehriTimeNextDay.value = timeData['Fajr'];
+    }
+
+    loading.value = false;
+    return responseNextDay;
   }
 
 }

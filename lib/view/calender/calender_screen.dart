@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ramadantime/res/colors/app_color.dart';
+import 'package:ramadantime/res/widgets/customBottomBar.dart';
 import 'package:ramadantime/view-models/controller/calender_controller.dart';
 
 
@@ -17,7 +18,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: AppColor.appColor,
-        iconTheme: IconThemeData(color: AppColor.fontColor),
+        iconTheme: const IconThemeData(color: AppColor.fontColor),
         title: const Text(
           'ক্যালেন্ডার',
           style: TextStyle(color: AppColor.fontColor),
@@ -27,7 +28,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
         padding: const EdgeInsets.all(10.0),
         child: Obx(() {
           if (controller.calenderTimes.isEmpty) {
-            return Center(child: const CircularProgressIndicator(
+            return const Center(child: CircularProgressIndicator(
               color: AppColor.appColor,
             ));
           } else {
@@ -35,6 +36,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
           }
         }),
       ),
+      bottomNavigationBar: const customBottomBar(),
     );
   }
 }
@@ -134,6 +136,7 @@ class TimeTable extends StatelessWidget {
             ),
           ],
         ),
+
       );
     }
 

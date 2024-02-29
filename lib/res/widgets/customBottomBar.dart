@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ramadantime/res/colors/app_color.dart';
@@ -17,6 +16,8 @@ class customBottomBar extends StatelessWidget {
     print(Get.currentRoute);
     return BottomNavigationBar(
       backgroundColor: Colors.green[200],
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
       items: [
         BottomNavigationBarItem(icon:InkWell(
             onTap: (){
@@ -37,6 +38,7 @@ class customBottomBar extends StatelessWidget {
           }
 
         },child:Get.currentRoute==RouteName.prayer_time ? Icon(Icons.watch_later_outlined,color:AppColor.appColor,):Icon(Icons.watch_later_outlined,color:Colors.black)) ,label:'Time'),
+
         BottomNavigationBarItem(icon:InkWell(onTap:(){
           Get.toNamed(RouteName.settings);
         },child: Get.currentRoute==RouteName.settings ? Icon(Icons.settings,color:AppColor.appColor,):Icon(Icons.settings,color:Colors.black)) ,label:'Settings'),

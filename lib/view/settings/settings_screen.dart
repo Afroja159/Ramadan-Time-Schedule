@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ramadantime/main.dart';
 import 'package:ramadantime/res/colors/app_color.dart';
+import 'package:ramadantime/res/widgets/customBottomBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -74,6 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
+      bottomNavigationBar:const customBottomBar(),
     );
   }
 }
