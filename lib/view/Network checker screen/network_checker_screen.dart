@@ -47,7 +47,7 @@ class NetworkErrorDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset('assets/icon/icon.png'),
+               // Image.asset('assets/icon/icon.png'),
                 Text('Something went wrong'),
                 Text('Check your connection and try again'),
                 TextButton(
@@ -55,7 +55,7 @@ class NetworkErrorDialog extends StatelessWidget {
                     Navigator.pop(context);
                     bool hasNetwork = await checkNetwork();
                     if (hasNetwork) {
-                      Get.to(() => customBottomBar());
+                      Get.toNamed(RouteName.homeScreen);
                     } else {
                       Get.to(() => NetworkErrorDialog());
                     }
