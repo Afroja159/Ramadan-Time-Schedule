@@ -48,8 +48,8 @@ class NetworkErrorDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                // Image.asset('assets/icon/icon.png'),
-                Text('Something went wrong'),
-                Text('Check your connection and try again'),
+                const Text('Something went wrong'),
+                const Text('Check your connection and try again'),
                 TextButton(
                   onPressed: () async {
                     Navigator.pop(context);
@@ -57,12 +57,12 @@ class NetworkErrorDialog extends StatelessWidget {
                     if (hasNetwork) {
                       Get.toNamed(RouteName.homeScreen);
                     } else {
-                      Get.to(() => NetworkErrorDialog());
+                      Get.to(() => const NetworkErrorDialog());
                     }
                   },
-                  child: Text('TRY AGAIN'),
+                  child: const Text('TRY AGAIN'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
               ],

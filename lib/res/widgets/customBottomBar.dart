@@ -23,12 +23,12 @@ class customBottomBar extends StatelessWidget {
             onTap: (){
               Get.offNamed(RouteName.homeScreen);
             },
-            child:Get.currentRoute==RouteName.homeScreen ? Icon(Icons.home,color:AppColor.appColor,):Icon(Icons.home,color: Colors.black,)),label:'Home',
+            child:Get.currentRoute==RouteName.homeScreen ? const Icon(Icons.home,color:AppColor.appColor,):const Icon(Icons.home,color: Colors.black,)),label:'Home',
         ),
         BottomNavigationBarItem(icon:InkWell(onTap: (){
           Get.toNamed(RouteName.calender);
         },
-            child: Get.currentRoute==RouteName.calender ? Icon(Icons.calendar_month,color:AppColor.appColor,):Icon(Icons.calendar_month,color:Colors.black)) ,label:'Calendar'),
+            child: Get.currentRoute==RouteName.calender ? const Icon(Icons.calendar_month,color:AppColor.appColor,):const Icon(Icons.calendar_month,color:Colors.black)) ,label:'Calendar'),
         BottomNavigationBarItem(icon:InkWell(onTap: (){
           _controller.savedPlaceGetting();
           if(_controller.savedPlace ==''){
@@ -37,11 +37,11 @@ class customBottomBar extends StatelessWidget {
             Get.toNamed(RouteName.prayer_time);
           }
 
-        },child:Get.currentRoute==RouteName.prayer_time ? Icon(Icons.watch_later_outlined,color:AppColor.appColor,):Icon(Icons.watch_later_outlined,color:Colors.black)) ,label:'Time'),
+        },child:Get.currentRoute==RouteName.prayer_time ? const Icon(Icons.watch_later_outlined,color:AppColor.appColor,):const Icon(Icons.watch_later_outlined,color:Colors.black)) ,label:'Time'),
 
         BottomNavigationBarItem(icon:InkWell(onTap:(){
           Get.toNamed(RouteName.settings);
-        },child: Get.currentRoute==RouteName.settings ? Icon(Icons.settings,color:AppColor.appColor,):Icon(Icons.settings,color:Colors.black)) ,label:'Settings'),
+        },child: Get.currentRoute==RouteName.settings ? const Icon(Icons.settings,color:AppColor.appColor,):const Icon(Icons.settings,color:Colors.black)) ,label:'Settings'),
       ],
     );
   }
