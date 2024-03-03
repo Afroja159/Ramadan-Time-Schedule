@@ -80,193 +80,195 @@ class _TimeViewState extends State<TimeView> {
             ),
           );
         } else {
-          return Column(
-          children: [
-            Container(
-                decoration: BoxDecoration(
-                  color: AppColor.appColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${DateFormat('dd MMMM yyyy', 'bn').format(DateFormat('dd MMM yyyy').parse(_controller.currentDate.value))}',
-                            style: const TextStyle(
-                              color: AppColor.fontColor,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600,
+          return SingleChildScrollView(
+            child: Column(
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                    color: AppColor.appColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${DateFormat('dd MMMM yyyy', 'bn').format(DateFormat('dd MMM yyyy').parse(_controller.currentDate.value))}',
+                              style: const TextStyle(
+                                color: AppColor.fontColor,
+                                fontSize: 25,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'এখন সময় ${DateFormat('h:mm ', 'bn').format(now)}মি:', // Format the time in Bangla
-                            style: const TextStyle(
-                              color: AppColor.fontColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                            Text(
+                              'এখন সময় ${DateFormat('h:mm ', 'bn').format(now)}মি:', // Format the time in Bangla
+                              style: const TextStyle(
+                                color: AppColor.fontColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
+                            // const Text(
+                            //   'রমজান ২০২৪ এর বাকি আছে ৩০দিন ',
+                            //   style: TextStyle(
+                            //       color: AppColor.fontColor,
+                            //       fontSize:15,
+                            //       fontWeight: FontWeight.w600),
+                            // ),
+                          ],
+                        ),
+                        Row(children: [
+                          Image.asset('assets/icon/sun.png',scale: 2.5,),
+                        ],)
+                      ],
+                    ),
+                  )),
+            
+              Container(
+                  decoration: BoxDecoration(
+                    color: AppColor.appColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                     // mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'আজকের সময়সূচী',
+                          style: TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:25,
+                              fontWeight: FontWeight.w600),
+                        ),
+            
+                        const SizedBox(
+                          height: 10,
+                        ),
+            
+                         Text(
+                          'ইফতারের সময়- ${TimeFormat(timeString: _controller.prayerTimes['Maghrib']).timeConvert()} মি:',
+                          style: const TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:16,
+                              fontWeight: FontWeight.w600),
+                                               ),
+                         const SizedBox(height: 5,),
+                        Text(
+                          'সেহরির সময়- ${TimeFormat(timeString: _controller.prayerTimes['Fajr']).timeConvert()} মি:',
+                          style: const TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 5,),
+                        Text(
+                          'পরবর্তী ইফতারির সময় - ${TimeFormat(timeString: _controller.iftarTimeNextDay.value).timeConvert()} মি:',
+                          style: const TextStyle(
+                            color: AppColor.fontColor,
+                            fontSize:16,
+                            fontWeight: FontWeight.w600,
                           ),
-                          // const Text(
-                          //   'রমজান ২০২৪ এর বাকি আছে ৩০দিন ',
-                          //   style: TextStyle(
-                          //       color: AppColor.fontColor,
-                          //       fontSize:15,
-                          //       fontWeight: FontWeight.w600),
-                          // ),
-                        ],
-                      ),
-                      Row(children: [
-                        Image.asset('assets/icon/sun.png',scale: 2.5,),
-                      ],)
-                    ],
-                  ),
-                )),
-
-            Container(
-                decoration: BoxDecoration(
-                  color: AppColor.appColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                   // mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'আজকের সময়সূচী',
-                        style: TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:25,
-                            fontWeight: FontWeight.w600),
-                      ),
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                       Text(
-                        'ইফতারের সময়- ${TimeFormat(timeString: _controller.prayerTimes['Maghrib']).timeConvert()} মি:',
-                        style: const TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:16,
-                            fontWeight: FontWeight.w600),
-                                             ),
-                       const SizedBox(height: 5,),
-                      Text(
-                        'সেহরির সময়- ${TimeFormat(timeString: _controller.prayerTimes['Fajr']).timeConvert()} মি:',
-                        style: const TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:16,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 5,),
-                      Text(
-                        'পরবর্তী ইফতারির সময় - ${TimeFormat(timeString: _controller.iftarTimeNextDay.value).timeConvert()} মি:',
-                        style: const TextStyle(
-                          color: AppColor.fontColor,
-                          fontSize:16,
-                          fontWeight: FontWeight.w600,
                         ),
-                      ),
-                      const SizedBox(height: 5,),
-                      Text(
-                        'পরবর্তী সেহরির সময় - ${TimeFormat(timeString: _controller.sehriTimeNextDay.value).timeConvert()} মি:',
-                        style: const TextStyle(
-                          color: AppColor.fontColor,
-                          fontSize:16,
-                          fontWeight: FontWeight.w600,
+                        const SizedBox(height: 5,),
+                        Text(
+                          'পরবর্তী সেহরির সময় - ${TimeFormat(timeString: _controller.sehriTimeNextDay.value).timeConvert()} মি:',
+                          style: const TextStyle(
+                            color: AppColor.fontColor,
+                            fontSize:16,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  )),
+            
+            
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                  decoration: BoxDecoration(
+                    color: AppColor.appColor,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                )),
-
-
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-                decoration: BoxDecoration(
-                  color: AppColor.appColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.all(10),
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-
-                      const Text(
-                        'আজকের নামাজের সময়সূচী',
-                        style: TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:25,
-                            fontWeight: FontWeight.w600),
-                      ),
-
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                      Text(
-                        'ফজর- ${TimeFormat(timeString: _controller.prayerTimes['Fajr']).timeConvert()} মি:',
-                        style: const TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:16,
-                            fontWeight: FontWeight.w600),
-                      ),
-
-                      const SizedBox(height: 5,),
-                      Text(
-                        'যোহর: ${TimeFormat(timeString: _controller.prayerTimes['Dhuhr']).timeConvert()} মি:',
-                        style: const TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:16,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 5,),
-                      Text(
-                        'আসর: ${TimeFormat(timeString: _controller.prayerTimes['Asr']).timeConvert()} মি:',
-                        style: const TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:16,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 5,),
-                      Text(
-                        'মাগরিব: ${TimeFormat(timeString: _controller.prayerTimes['Maghrib']).timeConvert()} মি:',
-                        style: const TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:16,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 5,),
-                      Text(
-                        'এশা: ${TimeFormat(timeString: _controller.prayerTimes['Isha']).timeConvert()} মি:',
-                        style: const TextStyle(
-                            color: AppColor.fontColor,
-                            fontSize:16,
-                            fontWeight: FontWeight.w600),
-                      ),
-
-                    ],
-                  ),
-                )),
-
-          ],
-        );
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+            
+                        const Text(
+                          'আজকের নামাজের সময়সূচী',
+                          style: TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:25,
+                              fontWeight: FontWeight.w600),
+                        ),
+            
+                        const SizedBox(
+                          height: 10,
+                        ),
+            
+                        Text(
+                          'ফজর- ${TimeFormat(timeString: _controller.prayerTimes['Fajr']).timeConvert()} মি:',
+                          style: const TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:16,
+                              fontWeight: FontWeight.w600),
+                        ),
+            
+                        const SizedBox(height: 5,),
+                        Text(
+                          'যোহর: ${TimeFormat(timeString: _controller.prayerTimes['Dhuhr']).timeConvert()} মি:',
+                          style: const TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 5,),
+                        Text(
+                          'আসর: ${TimeFormat(timeString: _controller.prayerTimes['Asr']).timeConvert()} মি:',
+                          style: const TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 5,),
+                        Text(
+                          'মাগরিব: ${TimeFormat(timeString: _controller.prayerTimes['Maghrib']).timeConvert()} মি:',
+                          style: const TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:16,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 5,),
+                        Text(
+                          'এশা: ${TimeFormat(timeString: _controller.prayerTimes['Isha']).timeConvert()} মি:',
+                          style: const TextStyle(
+                              color: AppColor.fontColor,
+                              fontSize:16,
+                              fontWeight: FontWeight.w600),
+                        ),
+            
+                      ],
+                    ),
+                  )),
+            
+            ],
+                    ),
+          );
       }
       }),
 
